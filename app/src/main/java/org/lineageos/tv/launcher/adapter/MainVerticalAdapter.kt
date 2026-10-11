@@ -19,7 +19,10 @@ class MainVerticalAdapter :
     class ViewHolder(
         private val mainRowItemView: MainRowItemView,
     ) : RecyclerView.ViewHolder(mainRowItemView) {
-        fun bind(item: Pair<Long, MainRowItem>, position: Int) {
+        /**
+         * @return true if the row took focus
+         */
+        fun bind(item: Pair<Long, MainRowItem>, requestFocus: Boolean): Boolean {
             mainRowItemView.setData(item.second)
             mainRowItemView.updateLayoutParams {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -40,14 +43,32 @@ class MainVerticalAdapter :
                 ).toInt()
             }
 
-            if (position == 0) {
-                mainRowItemView.requestFocus()
-            }
+            return requestFocus && mainRowItemView.requestFocus()
         }
     }
 
+    private var recyclerView: RecyclerView? = null
+
+    // The first row only grabs focus until something in the grid has it. Doing it on every bind
+    // stole focus whenever that row was re-bound after scrolling back to it, which bounced
+    // the selection around while navigating up.
+    private var initialFocusDone = false
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        this.recyclerView = null
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        val gotFocus = holder.bind(getItem(position), position == 0 && !initialFocusDone)
+        if (gotFocus || recyclerView?.hasFocus() == true) {
+            initialFocusDone = true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
