@@ -10,14 +10,17 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v6
 
+    # Sets up JDK 17 and verifies Android.bp is up to date
     - name: Build
       uses: ./.github/workflows/build
 
-    - name: Build APK
+    - name: Assemble launcher APK
       run: ./gradlew app:assembleDebug
 
-    - name: Upload APK artifact
+    - name: Upload launcher APK
       uses: actions/upload-artifact@v4
       with:
-        name: apk
+        name: launcher-debug-apk
         path: app/build/outputs/apk/debug/*.apk
+        if-no-files-found: error
+        retention-days: 14
