@@ -10,8 +10,10 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.updateLayoutParams
 import androidx.leanback.widget.HorizontalGridView
 import org.lineageos.tv.launcher.R
+import org.lineageos.tv.launcher.adapter.TvAdapter
 import org.lineageos.tv.launcher.model.MainRowItem
 
 class MainRowItemView @JvmOverloads constructor(
@@ -24,6 +26,18 @@ class MainRowItemView @JvmOverloads constructor(
     fun setData(mainRowItem: MainRowItem) {
         titleView.text = mainRowItem.label
         horizontalGridView.adapter = mainRowItem.adapter
+
+        // Channel rows (everything that isn't an app row) hold artwork cards with a title below
+        // them, which need more height than the app rows or the title gets clipped
+        horizontalGridView.updateLayoutParams {
+            height = resources.getDimensionPixelSize(
+                if (mainRowItem.adapter is TvAdapter<*, *>) {
+                    R.dimen.main_all_apps_row_height
+                } else {
+                    R.dimen.main_channel_grid_height
+                }
+            )
+        }
     }
 
     init {
