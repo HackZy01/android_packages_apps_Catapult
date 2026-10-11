@@ -25,7 +25,6 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.leanback.widget.VerticalGridView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -273,18 +272,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             updateTopBarOffset()
         }
 
-        mainVerticalGridView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                updateTopBarOffset()
-            }
-        })
-
-        mainVerticalGridView.addOnChildAttachStateChangeListener(
-            object : RecyclerView.OnChildAttachStateChangeListener {
-                override fun onChildViewAttachedToWindow(view: View) = updateTopBarOffset()
-                override fun onChildViewDetachedFromWindow(view: View) = updateTopBarOffset()
-            }
-        )
+        // Scroll callbacks aren't reliable here: when the grid re-aligns after a focus change, or
+        // a row is re-attached during a fast scroll, it may not have been positioned yet. Read
+        // the final positions right before every frame instead, so the bar can't get stuck.
+        mainVerticalGridView.viewTreeObserver.addOnPreDrawListener {
+            updateTopBarOffset()
+            true
+        }
     }
 
     private fun updateTopBarOffset() {
