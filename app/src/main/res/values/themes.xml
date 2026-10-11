@@ -40,7 +40,47 @@
         <item name="android:windowTransitionBackgroundFadeDuration">350</item>
     </style>
 
-    <style name="Theme.Catapult" parent="Theme.Material3.Dark.NoActionBar.Leanback" />
+    <!--
+         Fixed dark color scheme built from the palette in colors.xml, so the launcher looks the
+         same on every Android version (no dynamic colors).
+    -->
+    <style name="Theme.Catapult" parent="Theme.Material3.Dark.NoActionBar.Leanback">
+        <item name="colorPrimary">@color/system_accent1_200_dark</item>
+        <item name="colorOnPrimary">@color/system_accent1_800_dark</item>
+        <item name="colorPrimaryContainer">@color/system_accent1_700_dark</item>
+        <item name="colorOnPrimaryContainer">@color/system_accent1_100_dark</item>
+        <item name="colorPrimaryInverse">@color/system_accent1_600_dark</item>
+
+        <item name="colorSecondary">@color/system_accent2_200_dark</item>
+        <item name="colorOnSecondary">@color/system_accent2_800_dark</item>
+        <item name="colorSecondaryContainer">@color/system_accent2_700_dark</item>
+        <item name="colorOnSecondaryContainer">@color/system_accent2_100_dark</item>
+
+        <item name="colorTertiary">@color/system_accent3_200_dark</item>
+        <item name="colorOnTertiary">@color/system_accent3_800_dark</item>
+        <item name="colorTertiaryContainer">@color/system_accent3_700_dark</item>
+        <item name="colorOnTertiaryContainer">@color/system_accent3_100_dark</item>
+
+        <item name="android:colorBackground">@color/m3_ref_palette_dynamic_neutral6</item>
+        <item name="colorOnBackground">@color/system_neutral1_100_dark</item>
+        <item name="colorSurface">@color/m3_ref_palette_dynamic_neutral6</item>
+        <item name="colorOnSurface">@color/system_neutral1_100_dark</item>
+        <item name="colorSurfaceVariant">@color/system_neutral2_700_dark</item>
+        <item name="colorOnSurfaceVariant">@color/system_neutral2_200_dark</item>
+        <item name="colorSurfaceInverse">@color/system_neutral1_100_dark</item>
+        <item name="colorOnSurfaceInverse">@color/system_neutral1_800_dark</item>
+        <item name="colorOutline">@color/system_neutral2_400_dark</item>
+        <item name="colorOutlineVariant">@color/system_neutral2_700_dark</item>
+
+        <item name="colorSurfaceContainerLow">@color/system_neutral1_900_dark</item>
+        <item name="colorSurfaceContainer">@color/m3_ref_palette_dynamic_neutral12</item>
+        <item name="colorSurfaceContainerHigh">@color/m3_ref_palette_dynamic_neutral17</item>
+        <item name="colorSurfaceContainerHighest">@color/m3_ref_palette_dynamic_neutral22</item>
+
+        <!-- Legacy attributes used by Leanback and a few of our own layouts -->
+        <item name="colorAccent">@color/system_accent1_200_dark</item>
+        <item name="colorPrimaryDark">@color/system_accent1_800_dark</item>
+    </style>
 
     <style name="Theme.Catapult.SideActivity">
         <item name="android:windowIsTranslucent">true</item>

@@ -4,5 +4,102 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <color name="toggleButtonBackground">#0B2A2C</color>
+    <color name="toggleButtonBackground">#261e1b</color>
+
+    <!-- Tonal palette (tone names follow the system_* dynamic color resources) -->
+    <color name="system_accent1_1000_dark">#000000</color>
+    <color name="system_accent1_900_dark">#331104</color>
+    <color name="system_accent1_800_dark">#4d2615</color>
+    <color name="system_accent1_700_dark">#683b29</color>
+    <color name="system_accent1_600_dark">#83523e</color>
+    <color name="system_accent1_500_dark">#a06a55</color>
+    <color name="system_accent1_400_dark">#bc836d</color>
+    <color name="system_accent1_300_dark">#da9d85</color>
+    <color name="system_accent1_200_dark">#f8b89f</color>
+    <color name="system_accent1_100_dark">#ffdbce</color>
+    <color name="system_accent1_50_dark">#ffede7</color>
+    <color name="system_accent1_10_dark">#fffbff</color>
+    <color name="system_accent1_0_dark">#ffffff</color>
+
+    <color name="system_accent2_1000_dark">#000000</color>
+    <color name="system_accent2_900_dark">#2c160d</color>
+    <color name="system_accent2_800_dark">#442a20</color>
+    <color name="system_accent2_700_dark">#5d4035</color>
+    <color name="system_accent2_600_dark">#77574b</color>
+    <color name="system_accent2_500_dark">#926f62</color>
+    <color name="system_accent2_400_dark">#ad897b</color>
+    <color name="system_accent2_300_dark">#caa394</color>
+    <color name="system_accent2_200_dark">#e7beaf</color>
+    <color name="system_accent2_100_dark">#ffdbce</color>
+    <color name="system_accent2_50_dark">#ffede7</color>
+    <color name="system_accent2_10_dark">#fffbff</color>
+    <color name="system_accent2_0_dark">#ffffff</color>
+
+    <color name="system_accent3_1000_dark">#000000</color>
+    <color name="system_accent3_900_dark">#251a00</color>
+    <color name="system_accent3_800_dark">#3e2e00</color>
+    <color name="system_accent3_700_dark">#58440e</color>
+    <color name="system_accent3_600_dark">#715c25</color>
+    <color name="system_accent3_500_dark">#8c743b</color>
+    <color name="system_accent3_400_dark">#a78e51</color>
+    <color name="system_accent3_300_dark">#c4a869</color>
+    <color name="system_accent3_200_dark">#e0c382</color>
+    <color name="system_accent3_100_dark">#fedf9b</color>
+    <color name="system_accent3_50_dark">#ffefd2</color>
+    <color name="system_accent3_10_dark">#fffbff</color>
+    <color name="system_accent3_0_dark">#ffffff</color>
+
+    <color name="system_neutral1_1000_dark">#000000</color>
+    <color name="system_neutral1_900_dark">#211a17</color>
+    <color name="system_neutral1_800_dark">#372e2b</color>
+    <color name="system_neutral1_700_dark">#4e4541</color>
+    <color name="system_neutral1_600_dark">#675c58</color>
+    <color name="system_neutral1_500_dark">#807571</color>
+    <color name="system_neutral1_400_dark">#9b8e8a</color>
+    <color name="system_neutral1_300_dark">#b6a8a4</color>
+    <color name="system_neutral1_200_dark">#d2c3bf</color>
+    <color name="system_neutral1_100_dark">#efdfda</color>
+    <color name="system_neutral1_50_dark">#fdede8</color>
+    <color name="system_neutral1_10_dark">#fffbff</color>
+    <color name="system_neutral1_0_dark">#ffffff</color>
+
+    <color name="system_neutral2_1000_dark">#000000</color>
+    <color name="system_neutral2_900_dark">#251914</color>
+    <color name="system_neutral2_800_dark">#3c2d28</color>
+    <color name="system_neutral2_700_dark">#53433d</color>
+    <color name="system_neutral2_600_dark">#6c5b54</color>
+    <color name="system_neutral2_500_dark">#86736c</color>
+    <color name="system_neutral2_400_dark">#a18c85</color>
+    <color name="system_neutral2_300_dark">#bca79f</color>
+    <color name="system_neutral2_200_dark">#d9c2ba</color>
+    <color name="system_neutral2_100_dark">#f6ddd5</color>
+    <color name="system_neutral2_50_dark">#ffede7</color>
+    <color name="system_neutral2_10_dark">#fffbff</color>
+    <color name="system_neutral2_0_dark">#ffffff</color>
+
+    <!-- Custom neutrals (surfaces) -->
+    <color name="m3_ref_palette_dynamic_neutral4">#130d0a</color>
+    <color name="m3_ref_palette_dynamic_neutral6">#19120f</color>
+    <color name="m3_ref_palette_dynamic_neutral12">#261e1b</color>
+    <color name="m3_ref_palette_dynamic_neutral17">#312825</color>
+    <color name="m3_ref_palette_dynamic_neutral22">#3c332f</color>
+    <color name="m3_ref_palette_dynamic_neutral24">#413734</color>
+    <color name="m3_ref_palette_dynamic_neutral87">#e6d7d2</color>
+    <color name="m3_ref_palette_dynamic_neutral92">#f5e5e0</color>
+    <color name="m3_ref_palette_dynamic_neutral94">#fbebe5</color>
+    <color name="m3_ref_palette_dynamic_neutral96">#fff1ec</color>
+    <color name="m3_ref_palette_dynamic_neutral98">#fff8f6</color>
+
+    <!-- Custom neutral variants -->
+    <color name="m3_ref_palette_dynamic_neutral_variant4">#160c07</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant6">#1c110c</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant12">#291d17</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant17">#342721</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant22">#40322c</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant24">#453630</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant87">#ecd5cc</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant92">#fbe3da</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant94">#ffe9e1</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant96">#fff1ec</color>
+    <color name="m3_ref_palette_dynamic_neutral_variant98">#fff8f6</color>
 </resources>
