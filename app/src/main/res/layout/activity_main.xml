@@ -3,17 +3,16 @@
      SPDX-FileCopyrightText: The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <include
-        layout="@layout/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+    <!-- Fills the whole screen so rows scroll edge to edge. The top padding leaves room for the
+         top bar (adjusted at runtime to its real height) and the top bar is moved along with the
+         content in MainActivity. -->
     <androidx.leanback.widget.VerticalGridView
         android:id="@+id/main_vertical_grid"
         android:layout_width="match_parent"
@@ -21,11 +20,17 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingLeft="48dp"
-        android:paddingTop="24dp"
+        android:paddingTop="112dp"
         android:paddingRight="48dp"
         android:paddingBottom="100dp"
         android:verticalSpacing="25dp"
         app:focusOutEnd="true"
         app:focusOutFront="true" />
 
-</LinearLayout>
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
+</FrameLayout>
