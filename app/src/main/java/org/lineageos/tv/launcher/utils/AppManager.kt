@@ -62,12 +62,27 @@ object AppManager {
 
     fun uninstallable(app: ApplicationInfo, context: Context): Boolean {
         return (app.flags and FLAG_SYSTEM) == 0 &&
-                !app.isSignedWithPlatformKey &&
-                !SettingsLibUtils.isEssentialPackage(
-                    context.resources,
-                    context.packageManager,
-                    app.packageName
-                )
+                !isSignedWithPlatformKey(app) &&
+                !isEssentialPackage(context, app.packageName)
+    }
+
+    // The two helpers below rely on platform-only APIs (hidden ApplicationInfo method and
+    // SettingsLib). When the launcher isn't built into the system image (e.g. a Gradle build
+    // installed as a regular app) they're missing at runtime, which would otherwise crash.
+    private fun isSignedWithPlatformKey(app: ApplicationInfo) = try {
+        app.isSignedWithPlatformKey
+    } catch (e: LinkageError) {
+        false
+    }
+
+    private fun isEssentialPackage(context: Context, packageName: String) = try {
+        SettingsLibUtils.isEssentialPackage(
+            context.resources,
+            context.packageManager,
+            packageName
+        )
+    } catch (e: LinkageError) {
+        false
     }
 
     fun isSystemApp(context: Context): Boolean {
