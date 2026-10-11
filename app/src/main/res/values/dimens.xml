@@ -6,7 +6,7 @@
 <resources>
     <dimen name="app_card_height">100dp</dimen>
     <dimen name="app_card_width">177dp</dimen>
-    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_radius">10dp</dimen>
     <dimen name="watch_next_card_height">138dp</dimen>
     <dimen name="watch_next_card_width">246dp</dimen>
     <dimen name="favorite_card_height">71dp</dimen>
@@ -19,5 +19,7 @@
     <dimen name="main_app_row_height">142dp</dimen>
     <dimen name="main_all_apps_row_height">174dp</dimen>
     <dimen name="modal_margin">8dp</dimen>
+    <!-- Space between the top bar and the first row -->
+    <dimen name="main_top_bar_gap">24dp</dimen>
     <dimen name="notification_corner_radius">10dp</dimen>
 </resources>
