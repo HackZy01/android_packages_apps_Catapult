@@ -13,7 +13,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.children
 import org.lineageos.tv.launcher.R
 import org.lineageos.tv.launcher.model.Launchable
 
@@ -49,6 +51,18 @@ abstract class Card @JvmOverloads constructor(
 
     protected fun setupFocusShadow(cornerRadius: Float) {
         applyRoundedOutline(cornerRadius, appGraphicContainer)
+        appGraphicContainer.clipChildren = true
+        appGraphicContainer.clipToOutline = true
+
+        // Round the artwork itself instead of relying on the outline derived from its
+        // (transparent, tinted) background drawable, which doesn't clip the image reliably
+        appGraphicContainer.children
+            .filterIsInstance<ImageView>()
+            .forEach {
+                applyRoundedOutline(cornerRadius, it)
+                it.clipToOutline = true
+            }
+
         appGraphicContainer.stateListAnimator =
             AnimatorInflater.loadStateListAnimator(
                 context,
