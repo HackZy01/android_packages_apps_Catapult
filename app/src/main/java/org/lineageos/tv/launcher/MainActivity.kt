@@ -23,7 +23,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.leanback.widget.VerticalGridView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -199,6 +201,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
         mainVerticalGridView.adapter = mainVerticalAdapter
+        setupScrollingTopBar()
 
         favoritesAdapter.onFavoritesChangedCallback = {
             sharedPreferences.favoriteApps = it
@@ -252,6 +255,50 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (NotificationUtils.notificationPermissionGranted(this)) {
             notificationViewModel.unbindService(this)
         }
+    }
+
+    /**
+     * The grid fills the screen and the top bar sits on top of it. Instead of staying pinned,
+     * the bar is moved along with the rows, so it scrolls away with the content.
+     */
+    private fun setupScrollingTopBar() {
+        val gap = resources.getDimensionPixelSize(R.dimen.main_top_bar_gap)
+
+        topBarContainer.addOnLayoutChangeListener { _, _, top, _, bottom, _, _, _, _ ->
+            // Keep the first row right below the bar, whatever its real height is
+            val topPadding = (bottom - top) + gap
+            if (mainVerticalGridView.paddingTop != topPadding) {
+                mainVerticalGridView.updatePadding(top = topPadding)
+            }
+            updateTopBarOffset()
+        }
+
+        mainVerticalGridView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                updateTopBarOffset()
+            }
+        })
+
+        mainVerticalGridView.addOnChildAttachStateChangeListener(
+            object : RecyclerView.OnChildAttachStateChangeListener {
+                override fun onChildViewAttachedToWindow(view: View) = updateTopBarOffset()
+                override fun onChildViewDetachedFromWindow(view: View) = updateTopBarOffset()
+            }
+        )
+    }
+
+    private fun updateTopBarOffset() {
+        val barHeight = topBarContainer.height
+        val firstRow = mainVerticalGridView.layoutManager?.findViewByPosition(0)
+        val scrolled = when {
+            // Nothing to scroll yet
+            mainVerticalAdapter.itemCount == 0 -> 0
+            // The first row is gone, so the bar is too
+            firstRow == null -> barHeight
+            else -> mainVerticalGridView.paddingTop - firstRow.top
+        }
+
+        topBarContainer.translationY = -scrolled.coerceIn(0, barHeight).toFloat()
     }
 
     private fun setupAssistantButtons(assistIntent: Intent) {
