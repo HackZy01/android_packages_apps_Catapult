@@ -14,6 +14,8 @@
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:singleLine">true</item>
         <item name="android:layout_marginTop">4dp</item>
+        <!-- Descenders (p, y, q, g...) are clipped to the text box, keep a little room below -->
+        <item name="android:paddingBottom">2dp</item>
     </style>
 
     <style name="SideActivityHeaderStyle" parent="TextAppearance.Material3.HeadlineMedium">
