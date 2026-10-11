@@ -11,11 +11,11 @@ jobs:
       uses: actions/checkout@v6
 
     - name: Build
-      uses: ./.github/workflows/build
+      uses: ./.github/workflows/build/action.yml
 
     - name: Upload APK artifact
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: apk
-        path: |
-          **/*.apk
+        path: app/build/outputs/apk/**/*.apk
