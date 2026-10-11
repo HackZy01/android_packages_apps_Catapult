@@ -9,20 +9,15 @@ import android.app.role.RoleManager
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
 import androidx.core.view.updatePadding
 import androidx.leanback.widget.VerticalGridView
 import androidx.lifecycle.Lifecycle
@@ -62,7 +57,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // Views
     private val assistantButtonsContainer by lazy { findViewById<LinearLayout>(R.id.assistant_buttons)!! }
-    private val assistantHintImageView by lazy { findViewById<ImageView>(R.id.assistantHintImageView)!! }
     private val batteryPercentageTextView by lazy { findViewById<TextView>(R.id.batteryPercentageTextView)!! }
     private val keyboardAssistantButton by lazy { findViewById<ImageButton>(R.id.keyboard_assistant)!! }
     private val mainVerticalGridView by lazy { findViewById<VerticalGridView>(R.id.main_vertical_grid)!! }
@@ -195,8 +189,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         assistIntent.resolveActivity(packageManager)?.also {
             setupAssistantButtons(assistIntent)
         } ?: run {
-            assistantHintImageView.isInvisible = true
-            assistantButtonsContainer.isInvisible = true
+            assistantButtonsContainer.isGone = true
         }
 
         mainVerticalGridView.adapter = mainVerticalAdapter
@@ -306,35 +299,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         keyboardAssistantButton.setOnClickListener {
             startActivity(keyboardAssistantIntent)
         }
-
-        val transition = Slide().apply {
-            slideEdge = Gravity.START
-            duration = 400
-        }
-        assistantHintImageView.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                transition.removeTarget(assistantHintImageView)
-                transition.addTarget(assistantButtonsContainer)
-                TransitionManager.beginDelayedTransition(topBarContainer, transition)
-                assistantHintImageView.isVisible = false
-                assistantButtonsContainer.isVisible = true
-            }
-        }
-
-        val assistantButtonFocusListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                if (!keyboardAssistantButton.hasFocus() && !voiceAssistantButton.hasFocus()) {
-                    transition.removeTarget(assistantButtonsContainer)
-                    transition.addTarget(assistantHintImageView)
-                    TransitionManager.beginDelayedTransition(topBarContainer, transition)
-                    assistantButtonsContainer.isVisible = false
-                    assistantHintImageView.isVisible = true
-                }
-            }
-        }
-
-        keyboardAssistantButton.onFocusChangeListener = assistantButtonFocusListener
-        voiceAssistantButton.onFocusChangeListener = assistantButtonFocusListener
     }
 
     private fun askForHomeRoleIfNeeded() {
