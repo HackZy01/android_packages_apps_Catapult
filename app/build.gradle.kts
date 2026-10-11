@@ -18,8 +18,8 @@ android {
 
     defaultConfig {
         applicationId = "org.lineageos.tv.launcher"
-        minSdk = 31
-        targetSdk = 36
+        minSdk = 30
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
     }
