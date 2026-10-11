@@ -12,3 +12,10 @@ jobs:
 
     - name: Build
       uses: ./.github/workflows/build
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: apk
+        path: |
+          **/*.apk
