@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:visibility="invisible"
-            app:trackColor="#66000000"
+            app:trackColor="#40000000"
             app:trackCornerRadius="0dp"
-            app:trackThickness="5dp" />
+            app:trackThickness="4dp" />
 
     </FrameLayout>
 
