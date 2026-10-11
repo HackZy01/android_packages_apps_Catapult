@@ -2,6 +2,12 @@ name: build
 
 on: [push, pull_request, workflow_dispatch]
 
+env:
+  # Hidden-API android.jar from https://github.com/Reginer/aosp-android-jar
+  # (pinned to a commit so the build is reproducible)
+  ANDROID_JAR_COMMIT: 262f6ae931160011572a5adfe4ec6302585e8f60
+  ANDROID_JAR_SHA256: 231e29e345e85c7107bde3e08ece052c067ebbe9d72256f036b9a126e4dde0f6
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +19,43 @@ jobs:
     # Sets up JDK 17 and verifies Android.bp is up to date
     - name: Build
       uses: ./.github/workflows/build
+
+    - name: Cache hidden-API android.jar
+      id: android-jar-cache
+      uses: actions/cache@v4
+      with:
+        path: libs/android.jar
+        key: android-jar-36-${{ env.ANDROID_JAR_COMMIT }}-settingslib-stub-v1
+
+    # Replaces generate-android-jar.sh, which needs a lunched LineageOS tree.
+    - name: Fetch hidden-API android.jar
+      if: steps.android-jar-cache.outputs.cache-hit != 'true'
+      run: |
+        mkdir -p libs
+        curl -fsSL -o libs/android.jar \
+          "https://raw.githubusercontent.com/Reginer/aosp-android-jar/${ANDROID_JAR_COMMIT}/android-36/android.jar"
+        echo "${ANDROID_JAR_SHA256}  libs/android.jar" | sha256sum -c -
+
+        # The jar has no com.android.settingslib.Utils (used by AppManager.kt),
+        # so add a compile-only stub. The real class comes from SettingsLib
+        # when the app is built inside the AOSP tree.
+        mkdir -p /tmp/stub/src/com/android/settingslib /tmp/stub/out
+        cat > /tmp/stub/src/com/android/settingslib/Utils.java << 'JAVA'
+        package com.android.settingslib;
+
+        import android.content.pm.PackageManager;
+        import android.content.res.Resources;
+
+        public class Utils {
+            public static boolean isEssentialPackage(
+                    Resources resources, PackageManager pm, String packageName) {
+                throw new UnsupportedOperationException("stub");
+            }
+        }
+        JAVA
+        javac --release 17 -cp libs/android.jar -d /tmp/stub/out \
+          /tmp/stub/src/com/android/settingslib/Utils.java
+        jar uf libs/android.jar -C /tmp/stub/out com/android/settingslib/Utils.class
 
     - name: Assemble launcher APK
       run: ./gradlew app:assembleDebug
