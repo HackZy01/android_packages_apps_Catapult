@@ -20,6 +20,7 @@
         android:id="@+id/app_graphic_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/watch_next_card_height"
+        android:clipToOutline="true"
         android:duplicateParentState="true">
 
         <ImageView
@@ -33,16 +34,17 @@
             android:scaleType="centerCrop"
             android:visibility="gone" />
 
+        <!-- Flush with the bottom edge of the image, spanning its whole width. The container
+             clips to its rounded outline, so the ends follow the card's corners. -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/watch_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:paddingBottom="20dp"
             android:visibility="invisible"
-            app:trackCornerRadius="4dp" />
+            app:trackColor="#66000000"
+            app:trackCornerRadius="0dp"
+            app:trackThickness="5dp" />
 
     </FrameLayout>
 
