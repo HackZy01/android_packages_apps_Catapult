@@ -5,6 +5,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/watch_next_card_root"
     android:layout_width="@dimen/watch_next_card_width"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="6dp"
@@ -29,6 +30,7 @@
             android:backgroundTint="@android:color/black"
             android:clipToOutline="true"
             android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
             android:visibility="gone" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
