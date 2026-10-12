@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/menu_remove_favorite"
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/ic_unfavourite"
         android:iconTint="@android:color/white"
         android:title="@string/remove_favorite" />
 
