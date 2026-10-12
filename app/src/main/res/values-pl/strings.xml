@@ -25,7 +25,7 @@
     <string name="bluetooth_status">Akcesoria\n%1$s</string>
     <string name="not_connected">Nie połączono</string>
     <string name="enabled">Wł.</string>
-    <string name="disabled">Wył./string>
+    <string name="disabled">Wył.</string>
     <string name="app_permissions_toast">Nie przyznano uprawnień</string>
     <string name="home_role_request_dialog_title">Ustaw jako domyślną aplikację ekranu glównego</string>
     <string name="home_role_request_dialog_message">Ta aplikacja może działać jako launcher, czy chcesz przejść do Ustawień?</string>
