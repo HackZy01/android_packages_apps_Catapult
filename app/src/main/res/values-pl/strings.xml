@@ -14,7 +14,7 @@
     <string name="remove_favorite">Usuń z ulubionych</string>
     <string name="watch_next">Oglądaj dalej</string>
     <string name="modify_channels">Wybierz kanały</string>
-    <string name="channel_title">%1$s: %2$s</string>
+    <string name="channel_title">%2$s w %1$s</string>
     <string name="order_channels_guide">Aby uporządkować kanały, przytrzymaj wybrany kanał i przesuń go do żądanej pozycji.</string>
     <string name="search">Wyszukiwanie</string>
     <string name="modify_favorites">Tylko to na czym ci zależy</string>
@@ -38,8 +38,8 @@
     <string name="connected">Połączono</string>
     <string name="mic_assistant">Szukaj przy użyciu mikrofonu</string>
     <string name="keyboard_assistant">Szukaj za pomocą klawiatury</string>
-    <string name="program_title_with_episode_info">%1$s · %2$s</string>
-    <string name="program_season">S%1$s </string>
+    <string name="program_title_with_episode_info">%1$s %2$s</string>
+    <string name="program_season">S%1$s</string>
     <string name="program_episode">Odc. %1$s</string>
     <string name="move_left">Przesuń w lewo</string>
     <string name="move_right">Przesuń w prawo</string>
