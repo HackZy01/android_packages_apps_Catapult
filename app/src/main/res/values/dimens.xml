@@ -9,8 +9,8 @@
     <dimen name="card_radius">4dp</dimen>
     <dimen name="watch_next_card_height">138dp</dimen>
     <dimen name="watch_next_card_width">246dp</dimen>
-    <dimen name="favorite_card_height">71dp</dimen>
-    <dimen name="favorite_card_width">127dp</dimen>
+    <dimen name="favorite_card_height">90dp</dimen>
+    <dimen name="favorite_card_width">160dp</dimen>
     <dimen name="favorite_card_radius">8dp</dimen>
     <dimen name="card_focus_elevation">10dp</dimen>
     <dimen name="main_row_height">226dp</dimen>
@@ -21,5 +21,5 @@
     <dimen name="modal_margin">8dp</dimen>
     <!-- Space between the top bar and the first row -->
     <dimen name="main_top_bar_gap">24dp</dimen>
-    <dimen name="notification_corner_radius">10dp</dimen>
+    <dimen name="notification_corner_radius">16dp</dimen>
 </resources>
